@@ -56,7 +56,7 @@ Proje aşağıdaki katmanlardan oluşmaktadır:
 ## Teknolojiler
 
 *   **Backend:**
-    *   ASP.NET Core 7.0 (veya kullandığınız sürüm)
+    *   ASP.NET Core 8.0 (veya kullandığınız sürüm)
     *   Entity Framework Core 7.0 (veya kullandığınız sürüm)
     *   Microsoft SQL Server (veya kullandığınız veritabanı)
     *   JWT Bearer Authentication
