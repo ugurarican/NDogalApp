@@ -1,0 +1,245 @@
+﻿/* ================================================ */
+/* ====           Sepet Bölümü Stilleri         ==== */
+/* ================================================ */
+
+/* Sepet öğelerinin listelendiği ana konteyner */
+#basket-items-container {
+    margin-bottom: 25px; /* Alt özet bölümünden ayırmak için */
+}
+
+    /* Konteyner içindeki varsayılan mesaj (boş/yükleniyor) */
+    #basket-items-container p {
+        padding: 20px;
+        text-align: center;
+        color: #6c757d;
+        font-style: italic;
+    }
+
+/* Tek bir sepet öğesi */
+.basket-item {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Öğeler arası boşluk */
+    padding: 15px 0;
+    border-bottom: 1px solid #eee; /* Öğeleri ayır */
+    flex-wrap: wrap; /* Mobil için alt satıra kay */
+}
+    /* Son öğenin alt çizgisini kaldır */
+    .basket-item:last-child {
+        border-bottom: none;
+        margin-bottom: -15px; /* Varsa p sonrası boşluğu azaltmak için */
+    }
+
+    /* Sepet öğesi resmi */
+    .basket-item img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover; /* Resmi kırp */
+        border-radius: 4px;
+        border: 1px solid #eee;
+        flex-shrink: 0; /* Resim boyutu küçülmesin */
+        background-color: #f0f0f0; /* Yüklenemezse arka plan */
+    }
+
+    /* Ürün adı ve fiyatı içeren bölüm */
+    .basket-item .item-details {
+        flex-grow: 1; /* Kalan alanı doldur */
+        min-width: 150px; /* Çok daralmasın */
+    }
+
+        .basket-item .item-details h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.05em; /* Biraz daha küçük */
+            font-weight: 600; /* Biraz daha kalın */
+            color: #333;
+        }
+
+        .basket-item .item-details .item-price {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin: 0; /* Paragraf boşluğunu kaldır */
+        }
+
+    /* Miktar artırma/azaltma bölümü */
+    .basket-item .item-quantity {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 5px 10px; /* Dikey ve yatay boşluk */
+    }
+        /* Artırma/Azaltma Butonları */
+        .basket-item .item-quantity button {
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            color: #495057;
+            padding: 3px 9px; /* Buton boyutunu ayarla */
+            font-weight: bold;
+            font-size: 1em;
+            line-height: 1;
+        }
+
+            .basket-item .item-quantity button:hover:not(:disabled) {
+                background-color: #dee2e6;
+            }
+
+            .basket-item .item-quantity button:disabled {
+                /* base.css'deki genel disable stili üzerine yazar (daha spesifik) */
+                color: #adb5bd !important;
+                background-color: #f8f9fa !important;
+                border-color: #e9ecef !important;
+            }
+        /* Miktar göstergesi */
+        .basket-item .item-quantity span {
+            min-width: 28px; /* Genişliği ayarla */
+            text-align: center;
+            font-weight: 500;
+            font-size: 1em;
+        }
+
+    /* Tekil ürün toplam fiyatı */
+    .basket-item .item-total-price {
+        min-width: 95px; /* Genişliği ayarla */
+        text-align: right;
+        font-weight: bold;
+        margin-left: auto; /* Diğer öğelerden sağa it */
+        margin-right: 10px; /* Sil butonuyla arası */
+        color: #198754; /* Koyu Yeşil Fiyat */
+        font-size: 1.05em;
+    }
+
+    /* Sepetten Kaldır Butonu */
+    .basket-item .remove-item-btn {
+        background-color: #dc3545; /* Kırmızı */
+        color: white;
+        border: none;
+        padding: 5px 10px; /* İç boşluk */
+        font-size: 1.1em; /* İkonu büyüt */
+        line-height: 1; /* Dikey hizalama için */
+        flex-shrink: 0;
+    }
+
+        .basket-item .remove-item-btn:hover:not(:disabled) {
+            background-color: #c82333;
+        }
+
+
+/* Sepet Özeti (Toplam Tutar ve Butonlar) */
+#basket-summary {
+    margin-top: 30px; /* Sepet listesinden sonra boşluk */
+    padding-top: 20px;
+    border-top: 2px solid #dee2e6; /* Daha belirgin üst çizgi */
+    text-align: right; /* İçeriği sağa yasla */
+}
+    /* Toplam tutar metni */
+    #basket-summary p {
+        font-size: 1.25em;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #343a40;
+    }
+
+        #basket-summary p strong {
+            color: #555; /* "Toplam Tutar:" etiketi */
+        }
+
+    #basket-summary #basket-total-price {
+        color: #0d6efd; /* Mavi toplam tutar */
+        margin-left: 5px;
+    }
+
+    /* Sepet Özet Butonları */
+    #basket-summary button {
+        margin-left: 12px; /* Butonlar arası */
+        padding: 10px 22px; /* Biraz daha büyük butonlar */
+        font-weight: 500;
+        font-size: 1em;
+        border: none;
+    }
+
+/* Siparişi Tamamla Butonu */
+#checkout-btn {
+    background-color: #198754; /* Yeşil */
+    color: white;
+}
+
+    #checkout-btn:hover:not(:disabled) {
+        background-color: #157347;
+    }
+
+/* Sepeti Boşalt Butonu */
+#clear-basket-btn {
+    /* Cancel-btn genel stilini kullanabilir veya özelleştirilebilir */
+    background-color: #dc3545; /* Kırmızı (eğer cancel-btn yoksa) */
+    color: white;
+}
+
+    #clear-basket-btn:hover:not(:disabled) {
+        background-color: #bb2d3b;
+    }
+
+
+/* Sepet Bölümü için Responsive Ayarlamalar */
+@media (max-width: 768px) {
+    .basket-item {
+        flex-direction: column; /* Alt alta */
+        align-items: flex-start; /* Sola yasla */
+        position: relative; /* Silme butonu için */
+        padding: 15px; /* Mobilde iç boşluk */
+        border: 1px solid #eee; /* Çerçeve ekle */
+        border-radius: 6px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee !important; /* Alt çizgiyi koru */
+    }
+
+        .basket-item img {
+            align-self: center; /* Resmi ortala */
+            margin-bottom: 10px;
+            width: 100px;
+            height: 100px; /* Biraz daha büyük */
+        }
+
+        .basket-item .item-quantity {
+            justify-content: flex-start; /* Sola yasla */
+            margin: 10px 0;
+        }
+
+        .basket-item .item-total-price {
+            margin: 10px 0 0 auto; /* Sağ alta */
+            width: auto; /* Otomatik genişlik */
+        }
+        /* Silme butonunu sağ üste al */
+        .basket-item .remove-item-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 4px 8px;
+            font-size: 1em;
+        }
+
+    #basket-summary {
+        text-align: center; /* Özet ortalansın */
+    }
+
+        #basket-summary p {
+            text-align: center; /* Tutar da ortada */
+            font-size: 1.15em;
+        }
+
+        #basket-summary button {
+            width: calc(50% - 8px); /* İki buton yan yana */
+            margin: 15px 4px 0 4px;
+            padding: 12px 15px;
+        }
+}
+
+@media (max-width: 480px) {
+    .basket-item img {
+        width: 80px;
+        height: 80px;
+    }
+
+    #basket-summary button {
+        width: 100%; /* Butonlar tam genişlik */
+        margin: 10px 0 0 0;
+    }
+}

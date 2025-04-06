@@ -1,0 +1,201 @@
+﻿/* css/layout.css */
+
+/* ================================================ */
+/* ====        Sayfa Yapısı ve Yerleşim        ==== */
+/* ================================================ */
+
+/* Header ve Footer Genel Stilleri */
+header, footer {
+    background-color: #212529; /* Biraz daha koyu */
+    color: #dee2e6; /* Daha açık gri yazı */
+    padding: 1rem 1.5rem; /* rem kullan */
+    flex-shrink: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem; /* Daha fazla boşluk */
+    border-bottom: 1px solid #343a40; /* Hafif alt çizgi */
+}
+
+    header h1 {
+        margin: 0;
+        font-size: clamp(1.6rem, 4vw, 2rem); /* Biraz daha büyük başlangıç */
+        font-weight: 600;
+        color: #fff; /* Beyaz */
+    }
+
+        header h1 a {
+            color: inherit;
+        }
+
+            header h1 a:hover {
+                color: #e9ecef;
+            }
+
+footer {
+    margin-top: auto;
+    padding: 1rem 1.5rem;
+    font-size: 0.875rem; /* Biraz daha küçük */
+    text-align: center;
+    border-top: 1px solid #343a40;
+}
+
+    footer p {
+        margin-bottom: 0;
+        color: #adb5bd;
+    }
+
+/* ================================================ */
+/* ====    Ana İçerik Alanı ve Section Yapısı   ==== */
+/* ================================================ */
+main, section {
+    width: 100%;
+    max-width: 1140px; /* Bootstrap Large Container benzeri */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem; /* Alt boşluk artırıldı */
+    padding: 1.5rem; /* Genel iç boşluk */
+    flex-grow: 1;
+}
+
+/* Özel Arka Planlı/Stilli Bölümler */
+section {
+    background-color: #ffffff;
+    border-radius: 0.5rem; /* Hafif artırıldı */
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* Bootstrap shadow-sm */
+}
+
+    section.hidden {
+        display: none !important;
+    }
+
+    /* Bölüm Başlıkları */
+    main > h2, section > h2 {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 1.8rem; /* Daha fazla boşluk */
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid #dee2e6;
+        font-size: 1.75rem; /* Standart h2 boyutu */
+        font-weight: 500;
+        color: #343a40; /* Body ile aynı renk */
+    }
+    /* "Ana Sayfaya Dön" Linki */
+    section > p > a.back-to-home {
+        display: block;
+        margin-top: 1.5rem; /* Boşluk artırıldı */
+        text-align: center;
+        font-weight: 500;
+    }
+
+/* === Bölüm Genişlik Ayarlamaları === */
+#auth-forms,
+#profile-section {
+    max-width: 540px; /* Bootstrap Small Container */
+}
+
+#basket-section,
+#order-history-section {
+    max-width: 960px; /* Bootstrap Medium/Large Container */
+}
+/* Admin bölümleri tam genişliğe yakın kalsın */
+#admin-category-section,
+#admin-product-section,
+#admin-orders-section,
+#admin-user-section {
+    max-width: 1140px;
+}
+
+/* Kartlar için genel grid konteyner */
+.content-container {
+    width: 100%;
+}
+
+
+/* ================================================ */
+/* ====       Responsive Layout Ayarları       ==== */
+/* ================================================ */
+@media (max-width: 1200px) {
+    main, section {
+        max-width: 960px;
+    }
+
+    #admin-category-section, #admin-product-section, #admin-orders-section, #admin-user-section {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 992px) {
+    main, section {
+        max-width: 720px;
+        padding: 1.25rem;
+    }
+
+    #admin-category-section, #admin-product-section, #admin-orders-section, #admin-user-section {
+        max-width: 720px;
+    }
+
+    header {
+        padding: 1rem 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    main > h2, section > h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    main, section {
+        max-width: 540px;
+        padding: 1rem;
+    }
+
+    #admin-category-section, #admin-product-section, #admin-orders-section, #admin-user-section {
+        max-width: 540px;
+    }
+
+    #auth-forms, #profile-section {
+        max-width: 100%;
+    }
+    /* Tam genişlik */
+    header {
+        flex-direction: column;
+    }
+
+        header h1 {
+            margin-bottom: 0.75rem;
+        }
+
+    #auth-nav {
+        justify-content: center;
+        width: 100%;
+        margin-top: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Telefonlar için daha fazla boşluk azaltma */
+    main, section {
+        padding: 1rem 0.8rem;
+        margin-bottom: 1.5rem;
+        max-width: 100%; /* Kenarlara yasla */
+    }
+
+    header {
+        padding: 0.8rem 1rem;
+    }
+
+    main > h2, section > h2 {
+        font-size: 1.4rem;
+        margin-bottom: 1.25rem;
+    }
+}

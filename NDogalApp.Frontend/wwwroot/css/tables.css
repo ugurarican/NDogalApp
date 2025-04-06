@@ -1,0 +1,266 @@
+﻿/* ================================================ */
+/* ====      Genel Tablo Stilleri (Admin)      ==== */
+/* ================================================ */
+
+/* Tabloları içeren konteyner (.admin-...-list-container) stilleri admin.css içinde */
+
+/* Genel Admin Tablosu Stili */
+.admin-generic-table,
+.admin-order-table {
+    width: 100%; /* Konteyner genişliğini doldurur */
+    border-collapse: collapse; /* Hücre çerçevelerini birleştirir */
+    margin-bottom: 0; /* Konteyner zaten boşluk veriyor */
+    font-size: 0.9rem; /* Tablo içi font boyutu */
+    background-color: #ffffff;
+    /* border ve border-radius admin.css'deki konteynerdan gelebilir veya buraya eklenebilir */
+    /* border: 1px solid #dee2e6; */
+    /* border-radius: 5px; */
+    /* overflow: hidden; */
+}
+
+    /* Tablo Başlığı (thead) ve Hücreleri (th) */
+    .admin-generic-table thead th,
+    .admin-order-table thead th {
+        background-color: #f8f9fa; /* Açık Gri Başlık */
+        color: #495057;
+        font-weight: 600; /* Kalın */
+        padding: 12px 15px; /* İç boşluk */
+        text-align: left;
+        border-bottom: 2px solid #dee2e6; /* Başlık altı daha belirgin çizgi */
+        white-space: nowrap; /* Başlıkların kaymasını engelle */
+        position: sticky; /* Kaydırmada sabit kal */
+        top: 0; /* En üste yapışık */
+        z-index: 10; /* Diğer satırların üzerinde */
+        vertical-align: bottom; /* Hizalama */
+    }
+        /* İlk başlık hücresi sola biraz daha yakın olabilir (ID'ler için) */
+        .admin-generic-table thead th:first-child,
+        .admin-order-table thead th:first-child {
+            /* padding-left: 20px; */
+        }
+        /* Son başlık hücresi (Aksiyonlar) sağa yaslı olabilir */
+        .admin-generic-table thead th:last-child,
+        .admin-order-table thead th:last-child {
+            text-align: right;
+            padding-right: 20px;
+        }
+
+
+    /* Tablo Gövdesi (tbody) ve Satırları (tr) */
+    .admin-generic-table tbody tr,
+    .admin-order-table tbody tr:not(.admin-order-details-row) {
+        border-bottom: 1px solid #e9ecef; /* Daha soluk satır çizgisi */
+        transition: background-color 0.15s ease-in-out;
+    }
+        /* Son satırın alt çizgisini kaldır */
+        .admin-generic-table tbody tr:last-child,
+        .admin-order-table tbody tr:last-of-type:not(.admin-order-details-row) {
+            border-bottom: none;
+        }
+        /* Zebra deseni */
+        .admin-generic-table tbody tr:nth-child(even),
+        .admin-order-table tbody tr:nth-child(even):not(.admin-order-details-row) {
+            background-color: #fcfdff; /* Çok hafif mavi/beyaz */
+        }
+        /* Hover efekti */
+        .admin-generic-table tbody tr:hover,
+        .admin-order-table tbody tr:not(.admin-order-details-row):hover {
+            background-color: #f1f3f5; /* Hover rengi */
+        }
+
+    /* Tablo Veri Hücreleri (td) */
+    .admin-generic-table tbody td,
+    .admin-order-table tbody td {
+        padding: 10px 15px; /* İç boşluk */
+        vertical-align: middle; /* Dikeyde ortala */
+        color: #495057; /* Metin rengi */
+        line-height: 1.5;
+        /* border-right: 1px solid #f1f3f5; */ /* Opsiyonel: Dikey ayırıcılar */
+    }
+/* Son hücrenin sağ border'ı olmasın */
+/* .admin-generic-table tbody td:last-child,
+ .admin-order-table tbody td:last-child {
+     border-right: none;
+ } */
+
+
+/* Genel Aksiyon Hücresi Stili */
+.actions-cell {
+    white-space: nowrap; /* Butonlar yan yana kalsın */
+    text-align: right !important; /* Butonları sağa yasla (mobil override edebilir) */
+    padding-right: 10px !important; /* Sağa biraz boşluk */
+    vertical-align: middle !important;
+    min-width: 100px; /* Düzenle/Sil ikonları sığsın */
+}
+    /* Genel Aksiyon Butonları (Düzenle/Sil) */
+    .actions-cell button {
+        margin-left: 6px; /* Butonlar arası */
+        padding: 5px 9px;
+        font-size: 1em; /* İkon boyutu için */
+        line-height: 1;
+        border: none;
+        color: white;
+        border-radius: 4px; /* Daha köşeli butonlar */
+        vertical-align: middle;
+    }
+
+    .actions-cell .edit-btn {
+        background-color: #ffc107;
+        color: #212529;
+    }
+
+        .actions-cell .edit-btn:hover:not(:disabled) {
+            background-color: #e0a800;
+        }
+
+    .actions-cell .delete-btn {
+        background-color: #dc3545;
+    }
+
+        .actions-cell .delete-btn:hover:not(:disabled) {
+            background-color: #c82333;
+        }
+    /* İkonlu butonların daha iyi görünmesi için */
+    .actions-cell button[title]:not([title=""]) {
+        /* Opsiyonel: Sadece ikon varsa tooltip gösterilebilir */
+    }
+
+/* Sipariş tablosundaki özel aksiyonlar (orders.css'te daha detaylı stil olabilir) */
+.admin-order-table .admin-actions-cell {
+    min-width: 190px;
+    text-align: left !important; /* Butonlar/Select sola hizalı */
+    vertical-align: middle !important;
+}
+
+    .admin-order-table .admin-actions-cell > div { /* Buton/Select grubu */
+        margin-bottom: 3px; /* Mobil veya alta kayarsa */
+    }
+
+
+/* --- Mobil Cihazlar İçin Tablo Görünümü --- */
+@media (max-width: 768px) {
+    .admin-generic-table thead,
+    .admin-order-table thead {
+        display: none; /* Başlığı gizle */
+    }
+
+    .admin-generic-table tr,
+    .admin-order-table tr:not(.admin-order-details-row) {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        padding: 0.75rem 1rem; /* Kart içi boşluk */
+        background-color: #fff !important; /* Zebra yok */
+        border-bottom: 1px solid #dee2e6 !important; /* Son satırın borderı görünsün */
+    }
+
+        .admin-generic-table tr:last-child,
+        .admin-order-table tr:not(.admin-order-details-row):last-of-type {
+            margin-bottom: 0; /* Son kartın alt boşluğu olmasın */
+        }
+
+
+    .admin-generic-table td,
+    .admin-order-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: right !important;
+        padding: 0.6rem 0 !important;
+        border: none;
+        border-bottom: 1px dashed #e9ecef; /* Hücreler arası daha soluk çizgi */
+        min-height: 35px;
+        position: relative; /* Label için */
+    }
+
+        .admin-generic-table td:last-of-type,
+        .admin-order-table td:last-of-type {
+            border-bottom: none; /* Kart içindeki son hücrenin çizgisi yok */
+        }
+
+        /* data-label'ı kullanarak başlıkları göster */
+        .admin-generic-table td::before,
+        .admin-order-table td::before {
+            content: attr(data-label);
+            font-weight: 600; /* Başlık gibi kalın */
+            color: #495057;
+            padding-right: 10px;
+            text-align: left;
+            width: auto; /* Otomatik genişlik */
+            /* flex-basis: 40%; */ /* İsteğe bağlı: Sabit genişlik */
+            margin-right: auto; /* Değeri sağa iter */
+            white-space: nowrap;
+            font-size: 0.85em;
+        }
+
+    /* Mobil Aksiyon Hücresi */
+    .actions-cell,
+    .admin-actions-cell {
+        display: block !important;
+        text-align: right !important; /* Butonları yine sağa yasla */
+        padding-top: 0.75rem !important; /* Üstteki elemandan ayır */
+        min-width: auto;
+    }
+
+        .actions-cell::before,
+        .admin-actions-cell::before {
+            display: none; /* Aksiyon label'ını gizle */
+        }
+
+        .actions-cell button,
+        .admin-actions-cell button,
+        .admin-actions-cell select {
+            /* margin: 3px 0 3px 5px !important; */ /* Boşlukları düzenle */
+            display: inline-block; /* Yan yana sığdırmaya çalış */
+            width: auto; /* Otomatik genişlik */
+            margin-bottom: 5px !important; /* Alt alta gelirse boşluk */
+        }
+
+        .admin-actions-cell > div {
+            margin-bottom: 0;
+        }
+    /* Grup boşluğunu kaldır */
+
+
+    /* Mobil Sipariş Detay Satırı */
+    .admin-order-table .admin-order-details-row {
+        /* margin-bottom: 1rem; */ /* Üstündeki karttan boşluk */
+        border: none;
+        background: transparent;
+        padding: 0;
+        box-shadow: none;
+    }
+
+        .admin-order-table .admin-order-details-row td {
+            display: block;
+            padding: 0 !important;
+            border: none;
+        }
+}
+
+@media (max-width: 480px) {
+    /* Çok küçük ekranlar için ek ayarlar */
+    .admin-generic-table td, .admin-order-table td {
+        padding: 0.5rem 0 !important;
+    }
+
+        .admin-generic-table td::before, .admin-order-table td::before {
+            font-size: 0.8em;
+        }
+
+    .actions-cell, .admin-actions-cell {
+        padding-top: 0.5rem !important;
+    }
+
+        .actions-cell button, .admin-actions-cell button {
+            padding: 4px 7px;
+            font-size: 0.85em;
+        }
+
+        .admin-actions-cell select {
+            font-size: 0.8em;
+            padding: 4px 6px;
+            height: 28px;
+        }
+}

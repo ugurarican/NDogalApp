@@ -1,0 +1,455 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N-Doğal Ürünler</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- ====================================================== -->
+    <!-- ====        SAYFA BAŞLIĞI VE NAVİGASYON           ==== -->
+    <!-- ====================================================== -->
+    <header>
+        <h1><a href="#" id="home-link">N-Doğal Ürünlerimiz</a></h1>
+        <nav id="auth-nav">
+            <button id="show-login-btn">Giriş Yap</button>
+            <button id="show-register-btn">Kayıt Ol</button>
+            <div id="user-info" class="hidden">
+                <span id="user-welcome-message"></span>
+                <!-- Profil, Sepet, Siparişlerim -->
+                <button id="show-profile-btn" title="Profilim">👤 Profil</button>
+                <button id="show-basket-btn" title="Sepetim">🛒 Sepetim (<span id="basket-item-count">0</span>)</button>
+                <button id="show-my-orders-btn" class="user-action-button" title="Siparişlerim">🧾 Siparişlerim</button>
+                <!-- Admin Butonları (Başlangıçta gizli) -->
+                <button id="show-admin-orders-btn" class="admin-action-button hidden" title="Sipariş Yönetimi">📦 Sipariş Yön.</button>
+                <button id="show-product-mgmt-btn" class="admin-action-button hidden" title="Ürün Yönetimi">🛍️ Ürün Yön.</button>
+                <button id="show-category-mgmt-btn" class="admin-action-button hidden" title="Kategori Yönetimi">🏷️ Kategori Yön.</button>
+                <button id="show-user-mgmt-btn" class="admin-action-button hidden" title="Kullanıcı Yönetimi">👥 Kullanıcı Yön.</button>
+                <!-- Çıkış Butonu -->
+                <button id="logout-btn" title="Çıkış Yap">🚪 Çıkış</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ====================================================== -->
+    <!-- ====        ANA İÇERİK ALANLARI                  ==== -->
+    <!-- ====================================================== -->
+    <!-- === Kimlik Doğrulama Formları === -->
+    <section id="auth-forms" class="hidden">
+        <div id="login-form-container">
+            <h3>Giriş Yap</h3>
+            <form id="login-form" novalidate>
+                <div class="form-group">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" required autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Şifre:</label>
+                    <input type="password" id="login-password" required autocomplete="current-password">
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Giriş Yap</button>
+                </div>
+                <p>Hesabın yok mu? <a href="#" id="switch-to-register">Kayıt Ol</a></p>
+            </form>
+        </div>
+        <div id="register-form-container" class="hidden">
+            <h3>Kayıt Ol</h3>
+            <form id="register-form" novalidate>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="register-firstname">Ad:</label>
+                        <input type="text" id="register-firstname" required autocomplete="given-name" maxlength="50">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-lastname">Soyad:</label>
+                        <input type="text" id="register-lastname" required autocomplete="family-name" maxlength="50">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email:</label>
+                    <input type="email" id="register-email" required autocomplete="email" maxlength="100">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Şifre (en az 6 karakter):</label>
+                    <input type="password" id="register-password" required minlength="6" autocomplete="new-password">
+                </div>
+                <div class="form-group">
+                    <label for="register-phone">Telefon (isteğe bağlı):</label>
+                    <input type="tel" id="register-phone" autocomplete="tel" placeholder="örn: 5xxxxxxxxx" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="register-address">Adres (isteğe bağlı):</label>
+                    <textarea id="register-address" rows="2" autocomplete="street-address" maxlength="250"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Kayıt Ol</button>
+                </div>
+                <p>Zaten hesabın var mı? <a href="#" id="switch-to-login">Giriş Yap</a></p>
+            </form>
+        </div>
+        <div id="auth-message" class="message-area hidden"></div>
+    </section>
+
+    <!-- === Ana İçerik (Başlangıçta Kategoriler/Sonra Ürünler) === -->
+    <main id="main-content">
+        <h2 id="main-content-title">Kategoriler</h2> <!-- Başlık JS ile değişecek -->
+        <div id="content-list-wrapper">
+            <!-- Spinner için sarmalayıcı -->
+            <div id="content-list" class="content-container">
+                <!-- Kategoriler veya ürünler JS ile buraya yüklenecek -->
+                <p>İçerik yükleniyor...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- === Profil Bölümü === -->
+    <section id="profile-section" class="hidden">
+        <h2>Profil Bilgilerim</h2>
+        <div class="profile-info">
+            <p><strong>Kullanıcı ID:</strong> <span id="profile-id">-</span></p>
+            <p><strong>Ad:</strong> <span id="profile-firstname">-</span></p>
+            <p><strong>Soyad:</strong> <span id="profile-lastname">-</span></p>
+            <p><strong>Email:</strong> <span id="profile-email">-</span></p>
+            <p><strong>Telefon:</strong> <span id="profile-phone">-</span></p>
+            <p><strong>Adres:</strong> <span id="profile-address">-</span></p>
+            <p><strong>Kullanıcı Tipi:</strong> <span id="profile-usertype">-</span></p>
+        </div>
+        <div id="profile-message" class="message-area hidden"></div>
+        <p style="text-align: center; margin-top: 20px;"><a href="#" class="back-to-home">Ana Sayfaya Geri Dön</a></p>
+    </section>
+
+    <!-- === Sepet Bölümü === -->
+    <section id="basket-section" class="hidden">
+        <h2>Sepetim</h2>
+        <div id="basket-items-container">
+            <p>Sepet yükleniyor...</p>
+        </div>
+        <div id="basket-summary" class="hidden">
+            <p><strong>Toplam Tutar:</strong> <span id="basket-total-price">0.00</span> TL</p>
+            <button id="clear-basket-btn" class="cancel-btn">Sepeti Boşalt</button>
+            <button id="checkout-btn">Siparişi Tamamla</button>
+        </div>
+        <div id="basket-message" class="message-area hidden"></div>
+        <p style="text-align: center; margin-top: 20px;"><a href="#" class="back-to-home">Alışverişe Devam Et</a></p>
+    </section>
+
+    <!-- === Müşteri Sipariş Geçmişi === -->
+    <section id="order-history-section" class="hidden">
+        <h2>Sipariş Geçmişim</h2>
+        <div id="order-history-list">
+            <p>Sipariş geçmişi yükleniyor...</p>
+        </div>
+        <p style="text-align: center; margin-top: 20px;"><a href="#" class="back-to-home">Ana Sayfaya Geri Dön</a></p>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- ====          ADMİN YÖNETİM BÖLÜMLERİ            ==== -->
+    <!-- ====================================================== -->
+    <!-- === Admin - Kategori Yönetimi === -->
+    <section id="admin-category-section" class="hidden">
+        <h2>Kategori Yönetimi (Admin)</h2>
+        <!-- Kategori Ekleme Formu -->
+        <div class="admin-form-section">
+            <h3 id="category-form-title">Yeni Kategori Ekle</h3>
+            <form id="admin-category-form" novalidate>
+                <input type="hidden" id="admin-category-id"> <!-- Düzenleme için gizli ID -->
+                <div class="form-group">
+                    <label for="admin-category-name">Kategori Adı:</label>
+                    <input type="text" id="admin-category-name" required maxlength="75">
+                </div>
+                <div class="form-group">
+                    <label for="admin-category-description">Açıklama (isteğe bağlı):</label>
+                    <textarea id="admin-category-description" rows="3" maxlength="250"></textarea>
+                </div>
+                <div id="category-form-message" class="message-area hidden"></div>
+                <div class="form-actions">
+                    <button type="button" id="admin-category-form-cancel-btn" class="cancel-btn hidden">İptal</button>
+                    <button type="submit" id="admin-category-submit-btn">Kategoriyi Ekle</button>
+                </div>
+            </form>
+        </div>
+        <hr class="admin-section-divider">
+        <!-- Kategori Listesi -->
+        <h3>Mevcut Kategoriler</h3>
+        <div id="admin-category-list-container">
+            <p>Kategoriler yükleniyor...</p>
+            <!-- Kategori Tablosu -->
+            <table id="admin-category-table" class="admin-generic-table hidden">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Açıklama</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div id="category-list-message" class="message-area hidden"></div>
+        <p style="text-align: center; margin-top: 20px;"><a href="#" class="back-to-home">Ana Sayfaya Geri Dön</a></p>
+    </section>
+
+    <!-- === Admin - Ürün Yönetimi === -->
+    <section id="admin-product-section" class="hidden">
+        <h2>Ürün Yönetimi (Admin)</h2>
+        <!-- Ürün Ekleme/Düzenleme Formu -->
+        <div class="admin-form-section">
+            <h3 id="product-form-title">Yeni Ürün Ekle</h3>
+            <form id="admin-product-form" novalidate>
+                <input type="hidden" id="admin-product-id">
+                <div class="form-group">
+                    <label for="admin-product-name">Ürün Adı:</label>
+                    <input type="text" id="admin-product-name" required maxlength="150">
+                </div>
+                <div class="form-group">
+                    <label for="admin-product-category">Kategori:</label>
+                    <select id="admin-product-category" required>
+                        <option value="">-- Kategori Seçiniz --</option>
+                    </select>
+                </div>
+                <div class="form-group-inline">
+                    <div class="form-group">
+                        <label for="admin-product-price">Fiyat (TL):</label>
+                        <input type="number" id="admin-product-price" required min="0.01" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-product-stock">Stok Adedi:</label>
+                        <input type="number" id="admin-product-stock" required min="0" step="1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="admin-product-description">Açıklama:</label>
+                    <textarea id="admin-product-description" rows="3" maxlength="500"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="admin-product-imageurl">Görsel URL:</label>
+                    <input type="url" id="admin-product-imageurl" placeholder="https://" maxlength="500">
+                </div>
+                <div id="product-form-message" class="message-area hidden"></div>
+                <div class="form-actions">
+                    <button type="button" id="admin-product-form-cancel-btn" class="cancel-btn hidden">İptal</button>
+                    <button type="submit" id="admin-product-submit-btn">Ürünü Ekle</button>
+                </div>
+            </form>
+        </div>
+        <hr class="admin-section-divider">
+        <!-- Ürün Listesi -->
+        <h3>Mevcut Ürünler</h3>
+        <div id="admin-product-list-container">
+            <p>Ürünler yükleniyor...</p>
+            <table id="admin-product-table" class="admin-generic-table hidden">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Fiyat</th>
+                        <th>Stok</th>
+                        <th>Kategori</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div id="product-list-message" class="message-area hidden"></div>
+        <p style="text-align: center; margin-top: 20px;"><a href="#" class="back-to-home">Ana Sayfaya Geri Dön</a></p>
+    </section>
+
+    <!-- === Admin - Sipariş Yönetimi === -->
+    <section id="admin-orders-section" class="hidden">
+        <h2>Sipariş Yönetimi (Admin)</h2>
+        <div class="admin-orders-management">
+            <h3>Tüm Siparişler</h3>
+            <!-- Filtreleme -->
+            <div class="admin-order-filters">
+                <label for="admin-order-status-filter">Duruma Göre Filtrele:</label>
+                <select id="admin-order-status-filter">
+                    <option value="">Tüm Durumlar</option>
+                </select>
+                <button id="admin-filter-orders-btn">Filtrele</button>
+            </div>
+            <!-- Sipariş Listesi -->
+            <div id="admin-order-list">
+                <p>Siparişler yükleniyor...</p>
+                <!-- Sipariş Tablosu -->
+                <table id="admin-order-table" class="admin-order-table hidden">
+                    <thead>
+                        <tr>
+                            <th>Sip. No</th>
+                            <th>Müşteri</th>
+                            <th>Tarih</th>
+                            <th>Tutar</th>
+                            <th>Durum</th>
+                            <th>Detay</th>
+                            <th>Aksiyonlar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <p style="text-align: center; margin-top: 20px;"><a href="#" class="back-to-home">Ana Sayfaya Geri Dön</a></p>
+    </section>
+
+    <!-- === Admin - Kullanıcı Yönetimi === -->
+    <section id="admin-user-section" class="hidden">
+        <h2>Kullanıcı Yönetimi (Admin)</h2>
+        <div id="admin-user-list-container">
+            <p>Kullanıcılar yükleniyor...</p>
+            <!-- Kullanıcı Tablosu -->
+            <table id="admin-user-table" class="admin-generic-table hidden">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad Soyad</th>
+                        <th>Email</th>
+                        <th>Tip</th>
+                        <th>İşlemler</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div id="user-list-message" class="message-area hidden"></div>
+        <p style="text-align: center; margin-top: 20px;"><a href="#" class="back-to-home">Ana Sayfaya Geri Dön</a></p>
+    </section>
+
+    <!-- ====================================================== -->
+    <!-- ====          MODAL PENCERELER (Admin vb.)        ==== -->
+    <!-- ====================================================== -->
+    <!-- === KATEGORİ DÜZENLEME MODALI (YENİ EKLENDİ) === -->
+    <div id="editCategoryModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Kategori Düzenle</h2>
+                <button type="button" class="close-modal-btn" title="Kapat">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="editCategoryForm" novalidate>
+                    <input type="hidden" id="editCategoryId"> <!-- Düzenlenen kategorinin ID'si -->
+                    <div class="form-group">
+                        <label for="editCategoryName">Kategori Adı:</label>
+                        <input type="text" id="editCategoryName" required maxlength="75">
+                    </div>
+                    <div class="form-group">
+                        <label for="editCategoryDescription">Açıklama:</label>
+                        <textarea id="editCategoryDescription" rows="3" maxlength="250"></textarea>
+                    </div>
+                    <div id="editCategoryFormMessage" class="message-area hidden"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="editCategoryCancelBtn" class="cancel-btn">İptal</button>
+                <button type="submit" form="editCategoryForm" id="editCategorySubmitBtn" class="save-btn">Güncelle</button>
+            </div>
+        </div>
+    </div>
+    <!-- === // KATEGORİ DÜZENLEME MODALI === -->
+    <!-- === KULLANICI DÜZENLEME MODALI === -->
+    <div id="editUserModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Kullanıcı Düzenle</h2>
+                <button type="button" class="close-modal-btn" title="Kapat">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="editUserForm" novalidate>
+                    <input type="hidden" id="editUserId">
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <span id="editUserEmailDisplay" class="form-control-static">-</span> <!-- Email değiştirilemez varsayımı -->
+                    </div>
+                    <div class="form-group-inline">
+                        <div class="form-group">
+                            <label for="editUserFirstName">Ad:</label>
+                            <input type="text" id="editUserFirstName" required maxlength="50">
+                        </div>
+                        <div class="form-group">
+                            <label for="editUserLastName">Soyad:</label>
+                            <input type="text" id="editUserLastName" required maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserPhone">Telefon:</label>
+                        <input type="tel" id="editUserPhone" maxlength="20">
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserAddress">Adres:</label>
+                        <textarea id="editUserAddress" rows="2" maxlength="250"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserType">Kullanıcı Tipi:</label>
+                        <select id="editUserType" required>
+                            <option value="">--Rol Seçiniz--</option>
+                        </select>
+                    </div>
+                    <div id="editUserFormMessage" class="message-area hidden"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="editUserCancelBtn" class="cancel-btn">İptal</button>
+                <button type="submit" form="editUserForm" id="editUserSubmitBtn" class="save-btn">Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- === KISMİ GÖNDERİM MODALI === -->
+    <div id="partialShipModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Kısmi Gönderim Yap</h2>
+                <button type="button" class="close-modal-btn" title="Kapat">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="partialShipForm" novalidate>
+                    <input type="hidden" id="partialShipOrderId">
+                    <p><strong>Sipariş No:</strong> <span id="partialShipOrderIdSpan">-</span></p>
+                    <h5>Gönderilecek Ürünleri Seçin:</h5>
+                    <div class="table-responsive" style="max-height: 300px; overflow-y: auto; margin-bottom: 15px; border: 1px solid #dee2e6; border-radius: 4px;">
+                        <table class="admin-generic-table">
+                            <!-- Modal içindeki tablo için sınıf -->
+                            <thead>
+                                <tr>
+                                    <th>Ürün Adı</th>
+                                    <th>Bekleyen</th>
+                                    <th style="width: 100px;">Gönderilen</th> <!-- Sabit genişlik -->
+                                </tr>
+                            </thead>
+                            <tbody id="partialShipItemsTbody">
+                                <tr><td colspan="3"><p style="text-align: center; padding:10px;">Yükleniyor...</p></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <label for="partialShipNotesInput">Yönetici Notu (isteğe bağlı):</label>
+                        <textarea id="partialShipNotesInput" rows="2" maxlength="500"></textarea>
+                    </div>
+                    <div id="partialShipFormMessage" class="message-area hidden"></div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="partialShipCancelBtn" class="cancel-btn">İptal</button>
+                <button type="submit" form="partialShipForm" id="partialShipSubmitBtn" class="save-btn">Gönderimi Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ====================================================== -->
+    <!-- ====             SAYFA SONU VE SCRIPT             ==== -->
+    <!-- ====================================================== -->
+    <footer>
+        <p>© 2024 N-Doğal App. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script src="js/app.js" type="module" defer></script>
+
+</body>
+</html>

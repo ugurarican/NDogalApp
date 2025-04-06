@@ -1,0 +1,162 @@
+﻿{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa; /* Açık Gri Arkaplan */
+    color: #343a40; /* Ana Metin Rengi (Koyu Gri) */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased; /* Daha yumuşak font görünümü */
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: 0.2px; /* Hafif harf aralığı */
+}
+
+a {
+    color: #007bff; /* Bağlantı Rengi (Mavi) */
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+    a:hover {
+        color: #0056b3; /* Bağlantı Hover Rengi */
+        text-decoration: none; /* Alt çizgiyi kaldıralım, isterseniz eklersiniz */
+    }
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    padding: 0.5rem 0.9rem; /* em/rem kullanmak daha tutarlı olabilir */
+    font-size: 0.95em;
+    vertical-align: middle; /* Diğer inline elemanlarla hizalama */
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+    button:focus {
+        outline: none; /* Odağı görsel olarak başka şekilde belirtelim */
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25); /* Mavi focus halkası */
+    }
+
+
+    button:not(:disabled):active {
+        transform: scale(0.97);
+        box-shadow: none; /* Tıklayınca focus kalkabilir */
+    }
+
+    button:disabled {
+        opacity: 0.65;
+        cursor: not-allowed !important;
+        background-color: #adb5bd !important; /* Daha soluk gri */
+        border-color: #adb5bd !important;
+        color: #fff !important;
+        transform: none; /* Disable iken active efekti olmasın */
+    }
+
+/* Başlık Hiyerarşisi ve Boşlukları */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0; /* Üst marjini sıfırla */
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #212529; /* Biraz daha koyu başlık */
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+/* Ana başlıklar */
+h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+/* Bölüm başlıkları */
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.85rem;
+}
+/* Alt başlıklar */
+h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+
+h5 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+h6 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+ul, ol {
+    padding-left: 1.5rem; /* İç boşluk biraz fazla */
+    margin-bottom: 1rem;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+    border-style: none; /* İstemeyen çerçeveleri kaldır */
+}
+
+/* Temel Tablo */
+table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+}
+
+table, th, td {
+    border: 1px solid #dee2e6; /* Genel tablo çerçevesi */
+}
+
+th, td {
+    padding: 0.75rem;
+    border-top: 1px solid #dee2e6;
+}
+
+thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+caption {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    color: #6c757d;
+    text-align: left;
+    caption-side: bottom;
+}
+
+hr {
+    margin: 1.5rem 0; /* Daha fazla boşluk */
+    color: inherit;
+    background-color: currentColor;
+    border: 0;
+    opacity: 0.15; /* Daha soluk */
+    height: 1px; /* Çizgi kalınlığı */
+}

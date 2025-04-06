@@ -1,0 +1,305 @@
+﻿/* ================================================ */
+/* ====     Sipariş Sayfası Stilleri           ==== */
+/* ================================================ */
+
+/* --- Müşteri Sipariş Geçmişi --- */
+
+/* Sipariş listesi UL elementi */
+ul.order-history-items {
+    list-style: none; /* Madde imlerini kaldır */
+    padding: 0;
+}
+
+/* Tek bir sipariş öğesi (LI) */
+li.order-history-item {
+    border: 1px solid #e9ecef; /* Çok hafif çerçeve */
+    border-radius: 6px;
+    margin-bottom: 25px; /* Siparişler arası boşluk */
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Hafif gölge */
+    overflow: hidden; /* İçerik taşarsa gizle */
+}
+
+/* Sipariş özeti (Üst kısım) */
+.order-summary {
+    padding: 15px 20px; /* İç boşluk */
+    display: flex;
+    flex-wrap: wrap; /* Mobil için */
+    justify-content: space-between; /* Öğeleri dağıt */
+    align-items: center;
+    gap: 10px 20px; /* Öğeler arası boşluk */
+    border-bottom: 1px dashed #e0e0e0; /* Detaydan ayır */
+    background-color: #f8f9fa; /* Hafif farklı arkaplan */
+}
+
+    .order-summary p {
+        margin: 0;
+        font-size: 0.95em;
+        color: #495057;
+        white-space: nowrap; /* Tek satır */
+    }
+
+    .order-summary strong {
+        color: #343a40; /* Daha koyu */
+        margin-right: 6px;
+    }
+    /* Durum bilgisi için özel stil (opsiyonel) */
+    .order-summary p strong:last-of-type + span {
+        font-weight: bold;
+    }
+
+    /* Detay Göster/Gizle Butonu */
+    .order-summary button.toggle-details-btn {
+        padding: 5px 12px;
+        font-size: 0.85em;
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        white-space: nowrap;
+        margin-left: auto; /* Mobil ve masaüstünde sağa iter */
+    }
+
+        .order-summary button.toggle-details-btn:hover {
+            background-color: #5a6268;
+        }
+
+/* Sipariş Detayları (Gizli alan) */
+.order-details {
+    padding: 20px; /* İç boşluk */
+    background-color: #ffffff; /* Beyaz arkaplan */
+    /* Geçiş efekti için (opsiyonel) */
+    /* max-height: 0; */
+    /* overflow: hidden; */
+    /* transition: max-height 0.3s ease-out, padding 0.3s ease-out; */
+}
+    /* .hidden class'ı display: none yaptığı için max-height animasyonu çalışmaz. */
+    /* Animasyon isteniyorsa JS ile class eklenip çıkarılabilir veya farklı bir yöntem kullanılır. */
+    .order-details.hidden {
+        display: none;
+    }
+
+    /* Ürün listesi (Detay içinde) */
+    .order-details ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 15px 0; /* Altına boşluk */
+    }
+
+    /* Tek bir ürün satırı */
+    .order-details li.order-detail-item {
+        margin-bottom: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px dotted #eee;
+        font-size: 0.95em; /* Biraz daha büyük font */
+        display: flex;
+        align-items: center; /* Dikey hizalama */
+        gap: 12px; /* Resim ve metin arası */
+        color: #333;
+    }
+
+        .order-details li.order-detail-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .order-details li.order-detail-item img {
+            width: 55px;
+            height: 55px; /* Biraz daha büyük */
+            object-fit: cover;
+            border-radius: 3px;
+            border: 1px solid #dee2e6;
+            flex-shrink: 0;
+            background-color: #f8f9fa;
+        }
+
+        .order-details li.order-detail-item span {
+            flex-grow: 1;
+            line-height: 1.5; /* Satır yüksekliği */
+        }
+
+        .order-details li.order-detail-item strong { /* Fiyat */
+            color: #000;
+        }
+
+/* Kargo Durum Bilgileri (Gönderilen/Bekleyen) */
+.shipment-info,
+.shipment-info-ok {
+    font-size: 0.85em;
+    font-style: italic;
+    margin-left: 8px; /* Ürün bilgisinden ayır */
+    white-space: nowrap;
+    padding: 2px 5px; /* Hafif dolgu */
+    border-radius: 3px;
+    vertical-align: middle; /* Diğer metinle hizala */
+}
+
+.shipment-info { /* Bekleyen var */
+    color: #a0620a; /* Koyu Turuncu */
+    background-color: #fff3cd; /* Açık Sarı */
+}
+
+.shipment-info-ok { /* Tümü gönderildi */
+    color: #0f5132; /* Koyu Yeşil */
+    background-color: #d1e7dd; /* Açık Yeşil */
+}
+
+/* Adres ve Notlar Bölümü (Detay İçinde) */
+.order-details > div:last-of-type { /* Ürün listesinden sonraki div (Adres/Not varsa) */
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px dashed #ced4da;
+    font-size: 0.9em;
+    color: #555;
+    word-break: break-word; /* Uzun adreslerin/notların taşmasını engelle */
+}
+
+    .order-details > div:last-of-type p {
+        margin-bottom: 8px;
+    }
+
+    .order-details > div:last-of-type strong {
+        color: #333;
+        margin-right: 5px;
+    }
+/* Notlar için preformat */
+.order-details pre {
+    white-space: pre-wrap; /* Satırları koru ve kaydır */
+    margin: 5px 0 0 0;
+    padding: 10px;
+    background-color: #f1f3f5;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-family: inherit; /* Sayfa fontunu kullan */
+    font-size: 1em; /* Aynı font boyutu */
+}
+
+
+/* --- Admin Sipariş Yönetimi (Tablo stilleri tables.css'de) --- */
+
+/* Admin Sipariş Tablosu özel stilleri */
+.admin-order-table {
+    /* tables.css'deki genel tablo stillerini kullanır */
+}
+/* Sipariş Durumu hücresi için ek stil (admin.css'de de var ama burada renklendirme vb. eklenebilir) */
+.admin-order-status-cell {
+    font-weight: bold;
+    text-align: center; /* Durumu ortala */
+}
+/* Örnek durum renklendirmesi (opsiyonel) */
+/* li[data-status="Onay Bekliyor"] .order-status-cell, */ /* Müşteri için de kullanılabilir */
+/* tr[data-order-id] .order-status-cell:contains("Onay Bekliyor") /* Daha zor */ {
+    /* color: orange; */
+}
+
+
+/* Admin Detay Satırı ve İçeriği */
+.admin-order-details-row td {
+    padding: 0 !important;
+    border: 0;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.admin-order-detail-content {
+    padding: 15px 20px;
+    background-color: #f0f3f5; /* Daha nötr bir arkaplan */
+    border-top: 1px solid #d8e0e6;
+}
+
+    .admin-order-detail-content h5 { /* Detay içi başlık */
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #333;
+    }
+    /* Admin detaylarındaki ürün listesi */
+    .admin-order-detail-content ul {
+        list-style: disc; /* Madde imi */
+        padding-left: 20px;
+        margin: 0 0 15px 0;
+        font-size: 0.9em;
+    }
+
+    .admin-order-detail-content li {
+        margin-bottom: 6px;
+    }
+
+    .admin-order-detail-content i {
+        font-size: 0.85em;
+        color: #6c757d;
+        margin-left: 5px;
+    }
+    /* Kalem ID'si */
+    /* Admin detaylarındaki Adres/Not kısmı */
+    .admin-order-detail-content > div:last-of-type {
+        margin-top: 15px;
+        padding-top: 10px;
+        border-top: 1px dashed #ced4da;
+        font-size: 0.9em;
+        color: #555;
+        word-break: break-word;
+    }
+
+
+/* Admin Aksiyon Hücresi */
+.admin-actions-cell {
+    min-width: 190px; /* İçeriğe göre ayarla */
+    /* Diğer stiller admin.css veya tables.css içinde */
+    vertical-align: middle !important; /* Butonları dikey ortala */
+}
+
+    .admin-actions-cell > div { /* Buton grupları */
+        margin-bottom: 3px; /* Gruplar arası hafif dikey boşluk */
+    }
+    /* Select ve Butonların dikey hizalanması */
+    .admin-actions-cell select,
+    .admin-actions-cell button {
+        vertical-align: middle;
+    }
+
+
+/* Responsive Siparişler */
+@media (max-width: 768px) {
+    /* Müşteri Sipariş Geçmişi */
+    li.order-history-item {
+        padding: 10px;
+    }
+
+    .order-summary {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+        .order-summary p {
+            font-size: 0.9rem;
+            white-space: normal;
+        }
+
+        .order-summary button.toggle-details-btn {
+            margin-left: 0;
+            margin-top: 10px;
+            width: 100%;
+            text-align: center;
+        }
+
+    .order-details {
+        padding: 15px;
+    }
+
+        .order-details li.order-detail-item {
+            flex-wrap: wrap;
+        }
+    /* Küçük ekranda alta kayabilir */
+
+    /* Admin Sipariş Tablosu */
+    /* Mobil tablo stilleri tables.css veya admin.css içinde olmalı */
+    .admin-order-table td.admin-actions-cell {
+        text-align: left !important;
+    }
+    /* Mobil label solda olacağı için */
+}

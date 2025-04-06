@@ -1,0 +1,252 @@
+﻿/* ================================================ */
+/* ====              Modal Stilleri            ==== */
+/* ================================================ */
+
+/* Genel Modal Arka Planı (Overlay) */
+.modal {
+    display: none; /* Başlangıçta JS tarafından gösterilene kadar gizli */
+    position: fixed; /* Sayfada sabit kal */
+    z-index: 1050; /* Diğer elementlerin üzerinde (Bootstrap modal ile aynı seviye) */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Arka plan kaymasın, içerik kendi içinde scroll olur */
+    background-color: rgba(33, 37, 41, 0.7); /* Yarı saydam koyu gri (Bootstrap dark benzeri) */
+    /* Açılış animasyonu için */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s; /* Görünürlük gecikmeli değişsin */
+}
+
+    /* Modal Görünür Durum */
+    .modal:not(.hidden) {
+        display: block; /* Veya flex/grid, ortalamak için */
+        opacity: 1;
+        visibility: visible;
+        transition-delay: 0s; /* Görünürlük gecikmesiz olsun */
+        overflow-y: auto; /* Modal içeriği taşarsa scroll çıksın */
+        padding: 30px 15px; /* Dikey scroll için üst/alt boşluk */
+    }
+
+
+/* Modal İçerik Kutusu */
+.modal-content {
+    position: relative; /* Kapatma butonu ve iç konumlandırma için */
+    background-color: #ffffff; /* Beyaz içerik arka planı */
+    margin: auto; /* Dikeyde ve yatayda ortala (eğer modal display:flex ise) VEYA Sadece Yatayda */
+    /* padding: 30px 35px; */ /* Padding daha sonra iç elementlere verilebilir */
+    border: none; /* Kenarlık istemiyorsak */
+    width: 90%; /* Varsayılan genişlik */
+    max-width: 650px; /* Maksimum genişlik */
+    border-radius: 0.5rem; /* Hafif yuvarlak köşeler (Bootstrap gibi) */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* Belirgin gölge */
+    /* Açılış animasyonu için */
+    transform: translateY(-50px);
+    transition: transform 0.3s ease-out;
+    opacity: 0; /* Animasyon için başlangıç */
+    visibility: hidden; /* Animasyon için başlangıç */
+}
+/* Modal açıldığında içerik animasyonu */
+.modal:not(.hidden) .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s; /* Görünürlük hemen değişsin */
+}
+
+/* --- Modal İç Yapısı --- */
+
+/* Modal Başlığı Alanı (İsteğe Bağlı - Header) */
+.modal-header {
+    display: flex;
+    justify-content: space-between; /* Başlık sola, kapatma sağa */
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #dee2e6; /* Başlık altı çizgi */
+    border-top-left-radius: calc(0.5rem - 1px); /* Köşe uyumu */
+    border-top-right-radius: calc(0.5rem - 1px);
+}
+
+    .modal-header h2 {
+        margin-bottom: 0; /* Başlık altı boşluğu sıfırla */
+        font-size: 1.4rem;
+        font-weight: 500;
+        color: #212529;
+    }
+/* Kapatma Butonu (X) */
+.close-modal-btn {
+    padding: 0.5rem; /* Tıklama alanını artır */
+    margin: -0.5rem -0.5rem -0.5rem auto; /* Konumlandırma */
+    background-color: transparent;
+    border: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    cursor: pointer;
+}
+
+    .close-modal-btn:hover {
+        color: #000;
+        text-decoration: none;
+        opacity: .75;
+    }
+
+/* Modal Gövdesi (Form vb. içerik) */
+.modal-body {
+    position: relative;
+    flex: 1 1 auto; /* Esnek alan */
+    padding: 1.5rem; /* İç boşluk */
+}
+    /* Modal Body içindeki form grupları */
+    .modal-body .form-group {
+        margin-bottom: 1rem;
+    }
+
+/* Modal Altbilgisi (Butonlar) */
+.modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; /* Butonları dikeyde hizala */
+    justify-content: flex-end; /* Butonları sağa yasla */
+    padding: 1rem 1.5rem;
+    background-color: #f8f9fa; /* Hafif gri altbilgi */
+    border-top: 1px solid #dee2e6;
+    border-bottom-right-radius: calc(0.5rem - 1px);
+    border-bottom-left-radius: calc(0.5rem - 1px);
+}
+
+    .modal-footer > :not(:last-child) {
+        margin-right: .5rem; /* Butonlar arası sağ boşluk */
+    }
+
+    .modal-footer button {
+        padding: 0.6rem 1.2rem; /* Modal buton padding'i */
+        font-size: 0.95em;
+    }
+        /* İptal/Kapat Butonu (footer içinde) */
+        .modal-footer button.cancel-btn,
+        .modal-footer button[data-dismiss="modal"] { /* Örnek attribute */
+            background-color: #6c757d;
+            color: white;
+        }
+
+            .modal-footer button.cancel-btn:hover:not(:disabled) {
+                background-color: #5a6268;
+            }
+        /* Kaydet/Onayla Butonu (footer içinde) */
+        .modal-footer button[type="submit"] {
+            background-color: #0d6efd;
+            color: white;
+        }
+
+            .modal-footer button[type="submit"]:hover:not(:disabled) {
+                background-color: #0b5ed7;
+            }
+
+
+/* --- Modal için Ekler --- */
+
+/* Eğer modalın dışında tıklanınca kapanmasını istemiyorsak */
+/* .modal.static-backdrop { backdrop-filter: none; } */ /* Arkaplan etkileşimini kapat */
+
+/* Uzun modal içeriği için scroll bar stil ayarları (isteğe bağlı) */
+/* .modal-body::-webkit-scrollbar { ... } */
+
+
+/* Responsive Ayarlamalar */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 10vh auto; /* Üstten boşluk azalt */
+        padding: 20px; /* İç boşluk azalt */
+    }
+
+    .modal-header {
+        padding: 1rem 1rem;
+    }
+
+    .modal-body {
+        padding: 1rem;
+    }
+
+    .modal-footer {
+        padding: 1rem 1rem;
+        justify-content: center;
+    }
+        /* Mobil için butonları ortala */
+        .modal-footer button {
+            width: calc(50% - 5px); /* Butonları yan yana */
+            margin: 5px;
+        }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 15px;
+    }
+
+    .modal-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .modal-footer button {
+        width: 100%;
+        margin: 5px 0;
+    }
+    /* Alt alta tam genişlik */
+}
+
+
+/* --- Örnek Kullanım HTML Yapısı (Referans) ---
+<div id="myModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Modal Başlığı</h2>
+      <button type="button" class="close-modal-btn" data-dismiss="modal" title="Kapat">×</button>
+    </div>
+    <div class="modal-body">
+      <p>Modal içeriği buraya gelecek.</p>
+      <form id="myForm">
+        ... form elemanları ...
+      </form>
+      <div id="myModalMessage" class="message-area hidden"></div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="cancel-btn" data-dismiss="modal">İptal</button>
+      <button type="submit" form="myForm" class="save-btn">Kaydet</button>
+    </div>
+  </div>
+</div>
+*/
+
+/* Açılış/Kapanış Animasyonları */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    to {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+/* Opsiyonel: Kapanış animasyonu isterseniz bunları açın ve .hidden için transition ayarlayın */
+/* @keyframes fadeOut { from { opacity: 1; visibility: visible; } to { opacity: 0; visibility: hidden; } } */
+/* @keyframes slideOut { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-30px); opacity: 0; } } */

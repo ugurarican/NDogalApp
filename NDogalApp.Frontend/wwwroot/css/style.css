@@ -1,0 +1,37 @@
+﻿/* ================================================ */
+/* ====         Ana Stil Dosyası (Import)       ==== */
+/* ================================================ */
+/* Bu dosya diğer tüm CSS dosyalarını içerir.       */
+/* Import sırası önemlidir (Genelden özele).      */
+/* ================================================ */
+
+/* 1. Temel Resetlemeler ve Varsayılanlar */
+@import url('base.css');
+
+/* 2. Sayfa Ana Yapısı ve Yerleşimi */
+@import url('layout.css');
+
+/* 3. Genel Yardımcı Sınıflar (Gizleme, Hizalama, Renk vb.) */
+@import url('utilities.css');
+
+/* 4. Bileşen Stilleri */
+@import url('navigation.css'); /* Header navigasyonu */
+@import url('forms.css'); /* Genel form elemanları */
+@import url('cards.css'); /* Kategori ve ürün kartları */
+@import url('basket.css'); /* Sepet sayfası */
+@import url('orders.css'); /* Sipariş listeleri ve detayları */
+@import url('tables.css'); /* Genel admin tabloları */
+@import url('modal.css'); /* Modal pencereler */
+@import url('admin.css'); /* Admin paneline özgü genel yerleşim/başlık vb. */
+
+/*
+Not: 'responsive.css' adında ayrı bir dosya oluşturmadık.
+Responsive kuralları (@media sorguları) ilgili oldukları
+dosyalara (layout.css, navigation.css, tables.css vb.) eklenmiştir.
+*/
+
+/*
+Bu ana dosyaya sadece ÇOK GENEL ve diğerlerini ezmesi (override)
+kesinlikle GEREKEN özel durum stilleri eklenebilir.
+Genellikle boş veya çok az içerikli olması hedeflenir.
+*/

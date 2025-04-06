@@ -1,0 +1,221 @@
+﻿/* ================================================ */
+/* ====      Navigasyon Barı (Header İçi)      ==== */
+/* ================================================ */
+
+/* Header içindeki ana navigasyon konteyneri (<nav id="auth-nav">) */
+#auth-nav {
+    display: flex;
+    align-items: center; /* Dikeyde ortala */
+    flex-wrap: wrap; /* Küçük ekranda alta insin */
+    gap: 0.6rem 0.8rem; /* Öğeler arası boşluk (dikey yatay) */
+    justify-content: flex-end; /* Geniş ekranda sağa yasla */
+    margin-left: auto; /* Header'da kalan boşluğu al */
+}
+
+/* === Giriş Yapılmamış Durum Butonları (<button id="show-login-btn"> vb.) === */
+#show-login-btn,
+#show-register-btn {
+    padding: 0.5rem 1rem; /* İç boşluk */
+    font-size: 0.875rem; /* Font boyutu */
+    font-weight: 500; /* Orta kalınlık */
+    line-height: 1.5;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none; /* Metin seçilmesin */
+    border: 1px solid #6c757d; /* Gri çerçeve */
+    border-radius: 0.25rem; /* Hafif köşe */
+    background-color: transparent; /* Arkaplan yok */
+    color: #f8f9fa; /* Header yazısıyla aynı renk (veya #dee2e6) */
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+    #show-login-btn:hover:not(:disabled),
+    #show-register-btn:hover:not(:disabled) {
+        color: #212529; /* Koyu yazı */
+        background-color: #e2e6ea; /* Açık gri hover */
+        border-color: #dae0e5;
+    }
+    /* Odaklanma stili (base.css'deki genel buton focus'u da etkiler) */
+    #show-login-btn:focus,
+    #show-register-btn:focus {
+        box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5); /* Gri focus */
+    }
+
+
+/* === Giriş Yapılmış Durum Konteyneri (<div id="user-info">) === */
+#user-info {
+    /* display: flex; JS zaten .hidden class'ını kaldırınca flex olacak */
+    align-items: center;
+    gap: 0.6rem 0.8rem; /* İçindeki öğeler arası boşluk */
+    flex-wrap: wrap;
+}
+
+/* Hoşgeldin Mesajı (<span id="user-welcome-message">) */
+#user-welcome-message {
+    font-weight: 500;
+    white-space: nowrap; /* Mümkünse tek satır */
+    color: #dee2e6; /* Daha açık gri */
+    margin-right: 0.5rem; /* Butonlardan önceki boşluk */
+}
+/* Admin Rol Vurgusu (<span class="user-role">) */
+.user-role {
+    font-size: 0.75em; /* Küçük */
+    color: #111827; /* Koyu renk */
+    background-color: #ffc107; /* Sarı arka plan */
+    font-weight: 600; /* Kalın */
+    vertical-align: middle;
+    padding: 0.15em 0.4em; /* Dolgu */
+    border-radius: 3px;
+    margin-left: 0.25rem; /* Hoşgeldin metninden sonra boşluk */
+    display: inline-block;
+    line-height: 1; /* Satır yüksekliği */
+}
+
+/* Header İçindeki Genel Kullanıcı Butonları (#user-info button) */
+#user-info button {
+    padding: 0.45rem 0.85rem; /* Biraz daha kompakt padding */
+    background-color: #6c757d; /* Orta Gri */
+    color: white;
+    border: none;
+    font-size: 0.825rem; /* Biraz daha küçük font */
+    font-weight: 500;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    line-height: 1.4; /* İçerik sığmazsa */
+}
+
+    #user-info button:hover:not(:disabled) {
+        background-color: #5a6268; /* Hover */
+    }
+
+/* === Özel Kullanıcı Butonları === */
+
+/* Profil Butonu */
+#show-profile-btn {
+    background-color: #5a6268; /* Biraz farklı gri tonu */
+}
+
+    #show-profile-btn:hover:not(:disabled) {
+        background-color: #495057;
+    }
+
+/* Sepetim Butonu */
+#show-basket-btn {
+    background-color: #17a2b8; /* Canlı Turkuaz */
+    font-weight: 500;
+}
+
+    #show-basket-btn:hover:not(:disabled) {
+        background-color: #138496;
+    }
+/* Sepet Sayacı */
+#basket-item-count {
+    display: inline-block;
+    font-weight: bold;
+    min-width: 18px; /* Tek rakam olsa bile yer kaplasın */
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 1px 6px;
+    border-radius: 8px; /* Daha yuvarlak */
+    margin-left: 4px;
+    font-size: 0.9em; /* Sayaç biraz küçük */
+    line-height: 1.1;
+}
+
+/* Siparişlerim Butonu */
+#show-my-orders-btn {
+    background-color: #0d6efd; /* Mavi */
+    /* user-action-button class'ı eklenmişti ama özel bir stil yok şimdilik */
+}
+
+    #show-my-orders-btn:hover:not(:disabled) {
+        background-color: #0b5ed7;
+    }
+
+/* Admin Yönetim Butonları */
+#user-info .admin-action-button {
+    background-color: #495057 !important; /* Koyu Gri (önemli - admin.css ile çakışmaması için) */
+    border: 1px solid #343a40;
+    font-size: 0.78rem; /* En küçük font */
+    padding: 0.4rem 0.75rem;
+}
+
+    #user-info .admin-action-button:hover:not(:disabled) {
+        background-color: #343a40 !important;
+        border-color: #212529;
+    }
+
+/* Çıkış Butonu */
+#logout-btn {
+    background-color: #dc3545; /* Kırmızı */
+    margin-left: 0.75rem; /* Diğerlerinden biraz daha ayrık */
+}
+
+    #logout-btn:hover:not(:disabled) {
+        background-color: #bb2d3b; /* Daha koyu kırmızı */
+    }
+
+/* === Responsive Navigasyon === */
+@media (max-width: 992px) {
+    #auth-nav, #user-info {
+        gap: 0.5rem 0.7rem;
+    }
+        /* Boşlukları biraz azalt */
+        #auth-nav button, #user-info button {
+            padding: 0.45rem 0.9rem;
+            font-size: 0.85em;
+        }
+
+        #user-info .admin-action-button {
+            padding: 0.35rem 0.7rem;
+            font-size: 0.75em;
+        }
+}
+
+@media (max-width: 768px) {
+    #auth-nav {
+        width: 100%;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    #user-info {
+        justify-content: center;
+    }
+    /* İçeriği ortala */
+}
+
+@media (max-width: 576px) { /* Küçük ekranlar */
+    #auth-nav {
+        flex-direction: column; /* Butonları/alanı alt alta diz */
+        align-items: stretch; /* Tam genişliğe yay */
+        gap: 0.6rem; /* Dikey boşluk */
+    }
+
+        #auth-nav > button, /* Giriş/Kayıt */
+        #user-info {
+            width: 100%; /* Tam genişlik */
+            margin: 0; /* Kenar boşluklarını sıfırla */
+        }
+
+    #user-info {
+        flex-direction: column; /* Kullanıcı bilgisi ve butonları alt alta */
+        align-items: stretch;
+        gap: 0.6rem;
+    }
+
+    #user-welcome-message {
+        text-align: center; /* Ortala */
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    #logout-btn {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+    /* Çıkış butonu alta gelince üst boşluk */
+}

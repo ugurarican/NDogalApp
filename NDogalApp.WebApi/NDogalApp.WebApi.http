@@ -1,0 +1,6 @@
+@NDogalApp.WebApi_HostAddress = http://localhost:5130
+
+GET {{NDogalApp.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

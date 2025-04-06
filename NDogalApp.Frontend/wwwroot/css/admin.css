@@ -1,0 +1,154 @@
+﻿/* ================================================ */
+/* ====        Admin Paneli Genel Stilleri     ==== */
+/* ================================================ */
+
+/* Admin bölümlerinin genel konteyneri (<section id="admin-...">) */
+#admin-category-section,
+#admin-product-section,
+#admin-orders-section,
+#admin-user-section {
+    /* layout.css'den max-width, background, shadow vb. alır */
+    /* Buraya sadece admin bölümlerine özel ek stiller eklenebilir */
+    border-left: 4px solid #6c757d; 
+    padding-top: 20px;
+    padding-bottom: 25px;
+}
+
+    /* Admin bölümlerinin başlığı (örn: "Kategori Yönetimi (Admin)") */
+    #admin-category-section > h2,
+    #admin-product-section > h2,
+    #admin-orders-section > h2,
+    #admin-user-section > h2 {
+        color: #4a5568; 
+        border-bottom-color: #adb5bd; /* Alt çizgi rengi */
+    }
+
+/* Admin paneli içindeki formları içeren bölüm */
+.admin-form-section {
+    margin-top: 25px; /* Üstteki başlıktan sonra */
+    margin-bottom: 35px; /* Alttaki listeden önce */
+    padding: 25px 30px;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background-color: #f8f9fa; /* Form arkaplanı biraz farklı */
+}
+
+    /* Admin formu iç başlığı (Yeni Ekle / Düzenle) */
+    .admin-form-section h3 {
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 25px;
+        color: #343a40;
+        font-size: 1.3rem; /* Biraz daha küçük */
+        font-weight: 600;
+        border-bottom: 1px solid #ced4da;
+        padding-bottom: 12px;
+    }
+
+/* Admin bölümleri arasındaki yatay ayırıcı çizgi */
+hr.admin-section-divider {
+    margin: 40px 5% 30px 5%; /* Yanlardan biraz içeride */
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+}
+
+/* Admin listeleme tablolarının/içeriklerinin başlığı */
+/* (örn: Mevcut Kategoriler, Mevcut Ürünler) */
+#admin-category-list-container > h3,
+#admin-product-list-container > h3,
+#admin-orders-management > h3, /* Sipariş yönetimi farklı olabilir */
+#admin-user-list-container > h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 15px;
+    text-align: left; /* Başlık sola yaslı */
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+/* Sipariş yönetimindeki filtreleme barı öncesi başlık */
+#admin-orders-management > h3 {
+    border-bottom: none; /* Filtre barı ayıracağı için çizgiye gerek yok */
+    margin-bottom: 10px;
+}
+
+
+/* Admin Sipariş Filtreleme Barı */
+.admin-order-filters {
+    margin-bottom: 25px; /* Tablodan önceki boşluk */
+    padding: 15px 20px;
+    background-color: #f1f3f5;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Elemanlar arası boşluk */
+    flex-wrap: wrap;
+}
+
+    .admin-order-filters label {
+        font-weight: 500;
+        margin-bottom: 0;
+        white-space: nowrap; /* Label kırılmasın */
+    }
+    /* Filtreleme select ve butonu forms.css stillerini kullanacak */
+    /* Gerekirse burada override edilebilir */
+    .admin-order-filters select {
+        min-width: 200px;
+        flex-basis: 250px; /* Başlangıç genişliği */
+        flex-grow: 1; /* Esneklik */
+    }
+
+    .admin-order-filters button {
+        flex-shrink: 0; /* Buton küçülmesin */
+    }
+
+
+/* Admin listeleme alanları (tablo veya kartları içerecek) */
+#admin-order-list,
+#admin-user-list-container,
+#admin-category-list-container,
+#admin-product-list-container {
+    margin-top: 1.25rem; /* Üstündeki başlıktan boşluk */
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    background-color: #ffffff;
+    overflow-x: auto; /* Geniş tablolarda yatay scroll */
+    padding: 0; /* Padding tabloya verilecek */
+}
+
+    /* Liste konteyneri içindeki 'Yükleniyor...' veya 'Boş' mesajı */
+    #admin-order-list p:first-child:last-child,
+    #admin-user-list-container p:first-child:last-child,
+    #admin-category-list-container p:first-child:last-child,
+    #admin-product-list-container p:first-child:last-child {
+        padding: 25px; /* İçerik yoksa daha fazla boşluk */
+        text-align: center;
+        color: #6c757d;
+        font-style: italic;
+        margin: 0; /* Ekstra margin olmasın */
+    }
+
+/* Listelerin altındaki genel mesaj alanı */
+#category-list-message,
+#product-list-message,
+#user-list-message {
+    /* .message-area sınıfı utilities.css'de tanımlı */
+    margin-top: 1rem;
+    margin-bottom: 0.5rem; /* Ana Sayfa linkinden önce boşluk */
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-form-section {
+        padding: 20px;
+    }
+
+    .admin-order-filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+}
